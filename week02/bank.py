@@ -31,7 +31,7 @@ def input_amount(prompt_amount_string : str) -> int:
     # Prompt the user and read in the amount
     # abend if the user enters a non-numeric value
     try:
-        amount = int(input(f"Enter {prompt_amount_string}(in cent):"))
+        amount = int(input(f"Enter {prompt_amount_string}(in cent): "))
     except ValueError:
         print("Error: Please enter a valid number")
         exit()
@@ -40,6 +40,7 @@ def input_amount(prompt_amount_string : str) -> int:
 
 #--------------------------------------------------------------------------------
 # Function: main()
+# TODO: Move string generation into file so it is testable - may be overkill
 #--------------------------------------------------------------------------------
 def main():
     """Add two amounts and print out the answer in a human readable format with a euro sign and decimal point between the euro and cent of the amount"""
@@ -49,12 +50,14 @@ def main():
     amount2 = input_amount("amount2")
     # Add the two amounts
     total = amount1 + amount2
-    print(f"The sum of these is €{total}")
     # Convert to euro 
+    # There may be rounding issues - but we will ignore these for now
     euro = total / 100
     # zero pad cent if necessary
+    # format should be EZ9.99
     print(f"The sum of these is €{euro:.2f}") 
+
 
 # Call the main function
 if __name__ == "__main__":
-    main()
+    main()  
