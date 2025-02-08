@@ -27,14 +27,16 @@ def input_amount(prompt_amount_string : str) -> int:
         prompt_amount_string (str): The string to be displayed to the user
     Returns:
         int: The amount entered by the user
+    Note: if invalid input is entered the program will abend
     """
     # Prompt the user and read in the amount
     # abend if the user enters a non-numeric value
+    # TODO: loop until a valid number is entered
     try:
         amount = int(input(f"Enter {prompt_amount_string}(in cent): "))
     except ValueError:
         print("Error: Please enter a valid number")
-        exit()
+        exit(1)
     # Return the amount
     return amount
 
@@ -52,10 +54,12 @@ def main():
     total = amount1 + amount2
     # Convert to euro 
     # There may be rounding issues - but we will ignore these for now
+    # handles negative numbers as well
     euro = total / 100
-    # zero pad cent if necessary
     # format should be EZ9.99
+    # Print out the results in wetware readable format
     print(f"The sum of these is €{euro:.2f}") 
+
 
 
 # Call the main function
