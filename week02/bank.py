@@ -17,6 +17,8 @@
 # Notes:
 # Maybe a bit of an overkill to have a function to read in the amount, but it does make the main function a bit cleaner.
 #--------------------------------------------------------------------------------
+# import the decimal module
+import decimal as d
 
 #--------------------------------------------------------------------------------
 # Function: input_amount(prompt_amount_string : str) -> int
@@ -34,6 +36,8 @@ def input_amount(prompt_amount_string : str) -> int:
     # TODO: loop until a valid number is entered
     try:
         amount = int(input(f"Enter {prompt_amount_string}(in cent): "))
+        # convert to decimal
+        amount = d.Decimal(amount)
     except ValueError:
         print("Error: Please enter a valid number")
         exit(1)
@@ -53,9 +57,8 @@ def main():
     # Add the two amounts
     total = amount1 + amount2
     # Convert to euro 
-    # There may be rounding issues - but we will ignore these for now
-    # handles negative numbers as well
-    euro = total / 100
+    # 100 cent in a euro
+    euro = total / d.Decimal(100)
     # format should be EZ9.99
     # Print out the results in wetware readable format
     print(f"The sum of these is €{euro:.2f}") 
